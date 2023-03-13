@@ -88,6 +88,10 @@ header .icons span:last-child{
     color: white;
 }
 
+.days li.picked{
+    color: rgb(240, 232, 232);
+}
+
 .calendar ul li{
     z-index: 1;
     position: relative;
@@ -112,4 +116,8 @@ header .icons span:last-child{
 
 .days li.active::before{
     background: rgb(219, 70, 70);
+}
+
+.days li.picked::before{
+    background: rgb(83, 124, 56);
 }

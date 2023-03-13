@@ -1,6 +1,7 @@
 const currentDate = document.querySelector(".current-date"),
     daysTag = document.querySelector(".days"),
     prevnextBUTT = document.querySelectorAll('.icons span')
+    
 
 let date = new Date(),
 currYear = date.getFullYear(),
@@ -17,17 +18,17 @@ const RenderCalendar = () =>{
     let liTag = '';
 
     for (let i = firstDayofMonth; i > 0; i--) {
-        liTag += `<li class = 'inactive'>${lastDateofLastMonth - i + 1}</li>`;
+        liTag += `<li class = 'inactive data'>${lastDateofLastMonth - i + 1}</li>`;
     }
 
     for (let i = 1; i <= lastDateofMonth; i++){
         let isToday = i === date.getDate() && currMonth === new Date().getMonth()
                 && currYear === new Date().getFullYear() ? 'active' : ''
-        liTag += `<li class = '${isToday}'>${i}</li>`;
+        liTag += `<li class = '${isToday} data'>${i}</li>`;
     }
 
     for (let i = LastDayofMonth; i < 6; i++) {
-        liTag += `<li class = 'inactive'>${i - LastDayofMonth + 1}</li>`;
+        liTag += `<li class = 'inactive data'>${i - LastDayofMonth + 1}</li>`;
     }
     
     currentDate.innerText = `${months[currMonth]} ${currYear}`;
@@ -35,6 +36,7 @@ const RenderCalendar = () =>{
 }
 
 RenderCalendar();
+PickTheDate();
 
 prevnextBUTT.forEach(icon =>{
     icon.addEventListener('click',()=>{
@@ -49,5 +51,24 @@ prevnextBUTT.forEach(icon =>{
         }
 
         RenderCalendar();
+        PickTheDate();
     })
 });
+
+function PickTheDate(){
+    document.querySelectorAll('.data').forEach((e)=>{
+    let intervalId;
+    e.addEventListener('click', ()=>{
+        if(e.classList.contains('picked')){
+            intervalId = setTimeout(()=>{
+                e.classList.remove('picked')
+            },0)
+        }else{
+            e.classList.add('picked')
+            clearInterval(intervalId);
+        }
+        
+    })
+})
+}
+
